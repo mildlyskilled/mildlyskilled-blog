@@ -1,0 +1,8 @@
+baseURL = "http://blog.mildlyskilled.com/"
+languageCode = "en-gb"
+title = "Mildly Skilled"
+theme = "hyde"
+publishDir = "docs"
+[params]
+  description = "Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/"
+  layoutReverse = true
