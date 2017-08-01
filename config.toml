@@ -1,4 +1,4 @@
-baseURL = "http://blog.mildlyskilled.com/"
+baseURL = "http://www.mildlyskilled.com/"
 languageCode = "en-gb"
 title = "Mildly Skilled"
 theme = "hyde"
