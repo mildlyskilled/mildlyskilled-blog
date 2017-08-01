@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>A standalone java/jar application from Scala sources using Proguard - Part 1 &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>A standalone java/jar application from Scala sources using Proguard - Part 1</h1>
+      <span class="post-date">Sun, Feb 12, 2012</span>
+      <p>After about an hour of digging around and looking for a way to package a simulation I wrote in Scala for a coleague, I came across this process of doing it. I have reduced it down to a bash script which will be at the bottom of this post but I thought I should go through the steps a bit as the script makes certain assumptions.</p>
+
+<p>The first assumption is that you have the necessary libraries and such to run it they are as follows:</p>
+
+<ul>
+<li><p>Scala Library (That goes without saying if you&rsquo;re going to be writing Scala code) I have a custom path for mine as I want to manually sync my libraries, compilers and so on with the latest versions. I have extracted my copy to ~/Bin/Scala-2.9.1.final this will be the path my bash script will assume, you must change this to your path if it&rsquo;s different.</p></li>
+
+<li><p>Proguard: I am using version 4.7, version 4.4 comes with ubuntu but, seeing as I like to keep it at the latest and I am impatient my proguard lives in ~/Bin/Proguard4.7</p></li>
+
+<li><p>Java (This also goes without saying. You will probably need the JDK as well as the JRE so install them both) Proguard uses the java libraries extensively so you need that.</p></li>
+</ul>
+
+<p>My simulation is in the following directory structure
+engine</p>
+
+<pre><code>| - src
+| -- | --  Engine.scala
+| - build-app.sh
+| - scala-config.pro
+</code></pre>
+
+<p>The engine-&gt;src-&gt;Engine.scala is my scala application with the object Engine defined as my entry point this is important for the MANIFEST.MF file the script will be creating</p>
+
+<p><strong>Now the steps</strong></p>
+
+<ul>
+<li><p>First we can create a little folder to hold the output of the scala compiler so we create  a folder called bin inside of the engine folder itself so that the folder structure now looks like this
+engine</p>
+
+<p>| - src
+| &ndash; | &ndash; Engine.scala
+| - bin
+| - build-app.sh
+| - scala-config.pro</p></li>
+</ul>
+
+<p>by running</p>
+
+<pre><code>mkdir bin
+</code></pre>
+
+<p>then run the following while you&rsquo;re inside engine which from now on I will refer to as root</p>
+
+<pre><code>scalac -sourcepath src -d bin src/Engine.scala
+</code></pre>
+
+<p>this will compile the Engine.scala code into java classes inside of the bin folder</p>
+
+<ul>
+<li><p>This completes the scala bit, everything else following is run with Java so we need a MANIFEST.MF file to compile a jar</p>
+
+<p>echo &ldquo;Main-Class: Engine&rdquo; &gt; MANIFEST.MF</p></li>
+</ul>
+
+<p>this will do it for you. Bear in mind you are still at the root level</p>
+
+<p>Now at this point we change directory to the bin folder where scalac has created our classes and compile our jar using the manifest we have just created so this should do it:</p>
+
+<pre><code>cd bin
+jar -cfm ../engine-no-scala.jar ../MANIFEST.MF *.*
+</code></pre>
+
+<p>You can obviously do this a different way by staying in the root and making sure your path is correct, personally I found this easier.</p>
+
+<p>This above code will create our engine called engine-no-scala.jar with the MANIFEST.MF file
+bear in mind at this point if you ran java -jar engine-no-scala.jar it may fail if your scala code required the scala library to run
+mine does so now I need to package this WITH the scala library into a complete self-contained java application
+now earlier I did say that my scala home was in a custom location so we need to keep that in mind for the next section</p>
+
+<p><strong>PROGUARD</strong></p>
+
+<ul>
+<li><p>Not only does proguard include the required libraries and so on, it also obfuscates and discards any unused classes and packages this is very nifty for distribution as it cuts down by orders of magnitude the size of your application.When I did this without proguard my application was over 8 MB because the entire scala library was in my jar
+after I finished with proguard I am looking at an 8 KB application, and I think I can even get it smaller if I optimise my code a little bit morebut that&rsquo;s for another time. Proguard however needs a configuration file to work properly in my case, I went to their site and downloaded a<a href="http://proguard.sourceforge.net/#manual/examples.html"> sample scala-config file</a> (click on the Scala link) I just made the following changes to the vanilla one they provided</p>
+
+<p>-injars engine-no-scala.jar
+-injars /home/kwabena/Bin/scala-2.9.1.final/lib/scala-library.jar
+-outjars engine.jar
+-libraryjars <java.home>/lib/rt.jar</p>
+
+<p>-dontwarn scala.**
+-verbose</p></li>
+</ul>
+
+<p>I just changed the path to my jar file and my scala library and I also turned on verbosity (I like to know what&rsquo;s going on) my build script now has the following lines</p>
+
+<pre><code>cd ../
+echo &quot;Adding Scala library, obfuscating...&quot;
+#proguard
+proguard.sh @scala-config.pro
+</code></pre>
+
+<p>after that you can remove any side effects from the script with</p>
+
+<pre><code>rm -rf bin MANIFEST.MF engine-no-scala.jar
+</code></pre>
+
+<p>bear in mind that we changed the our current workind directory to the root level
+after a few minutes of compiling, obfuscating, optimisation and shrinking you should have a nice jar to run by itself on a computer with ONLY the JRE installed</p>
+
+<p>The complete script follows you can just copy this, save it into a file called &ldquo;build-app.sh&rdquo; as it is in my folder structure change the permissions to execute with</p>
+
+<pre><code>chmod +x build-app.sh
+</code></pre>
+
+<p>and run it</p>
+
+<pre><code>#!/bin/bash
+
+echo &quot;Creating required directories&quot;
+mkdir bin
+
+echo &quot;Compiling scala sources&quot;
+scalac -sourcepath src -d bin src/Engine.scala
+
+echo &quot;Creating Manifest&quot;
+#build manifest
+echo &quot;Main-Class: Engine&quot; &gt; MANIFEST.MF
+
+echo &quot;Building java archive from scala classes&quot;
+#create jar
+cd bin
+jar -cfm ../engine-no-scala.jar ../MANIFEST.MF *.*
+
+cd ../
+
+echo &quot;Adding Scala library, obfuscating...&quot;
+#proguard
+proguard.sh @scala-config.pro
+
+#remove fluff
+echo &quot;Removing fluff...&quot;
+rm -rf bin MANIFEST.MF engine-no-scala.jar
+</code></pre>
+
+<p>I hope you find it as useful as I would have should this have been available earlier.</p>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

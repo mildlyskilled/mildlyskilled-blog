@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Building an API for Mokocharlie&#39;s Community photos 2 &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>Building an API for Mokocharlie&#39;s Community photos 2</h1>
+      <span class="post-date">Wed, Feb 27, 2013</span>
+      
+
+<p>Last time out I introduced a basic idea for an API, this post will be about the basic architecture of the API framework. I have been listening to and reading on API best practices published by <a href="http://offers.apigee.com/ebook-api-design-yt/," title="Web API Design">APIGEE</a>. Although there are one or two things about this guide that I think pidgeon-hole me into certain standards, I agree in most part with a lot of what this e book has to say, I recommend you give it a browse at some point.</p>
+
+<h2 id="basic-architecture">Basic Architecture</h2>
+
+<p>Enough of this, on to the main point of this post. At the moment <a href="http://mokocharlie.com" title="Mokocharlie">Mokocharlie</a> is built on top of the <a href="http://framework.zend.com" title="Zend Framework">Zend Framework</a>. I put a lot of effort into that and I am not planning on rewriting it soon, I don&rsquo;t know maybe when we bump up versions to v5 (we are currently in v4). I will be building the API with <a href="http://four.laravel.com">Laravel 4</a>, although at the time of writing this it has not been officially released, I think there&rsquo;s enough stability in there to actually use it. So without further ado we proceed.</p>
+
+<h3 id="get-composer">Get Composer</h3>
+
+<p>If at this time you do not have composer installed on your computer please go <a href="http://getcomposer.com," title="Get composer">here</a> and install it now. I chose to do a global installation but you can do whatever you like as long as calling composer in your Laravel working directory works.</p>
+
+<h3 id="get-laravel-4">Get Laravel 4</h3>
+
+<ul>
+<li>And set up your version control (optional but highly recommended)
+Get the latest snapshot of the <a href="http://four.laravel.com" title="Laravel 4">Laravel 4</a>, at this point you can set up a repository to manage your code. We use <a href="http://www.unfuddle.com" title="Unfuddle">unfuddle</a> for all our mokocharlie projects and this will be no different.
+I have however found that the best way to get laravel working as a moving target is track the <a href="https://github.com/laravel/laravel">github repository</a>.</li>
+
+<li><p>I create a branch on my local laravel installation called &ldquo;laravel-tracker&rdquo;</p>
+
+<pre><code>git checkout -b laravel-tracker
+</code></pre></li>
+
+<li><p>Add a remote and call it laravel with the url for the laravel git repo</p>
+
+<pre><code>git remote add laravel git@github.com:laravel/laravel.git
+</code></pre></li>
+
+<li><p>Before I start working on anything I make sure I am in master and then do a git pull on the develop branch from laravel</p>
+
+<pre><code>git checkout laravel-tracker
+git pull laravel develop
+</code></pre></li>
+
+<li><p>Do a composer update</p>
+
+<pre><code>composer update
+</code></pre></li>
+
+<li><p>Make sure the application is not broken</p>
+
+<pre><code>php artisan serve
+</code></pre></li>
+
+<li><p>If I am happy with what I see (in most cases I am), I just kill the server and then checkout master and continue working</p></li>
+</ul>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

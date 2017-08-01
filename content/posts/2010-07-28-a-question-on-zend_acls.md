@@ -1,0 +1,50 @@
+---
+title: "A question on Zend_Acls"
+date: 2010-07-28T14:15:42+01:00
+draft: false
+author: "Kwabena Aning"
+tags: ["Zend", "PHP"]
+---
+
+So I have been playing with the Zend_Acl for a while now and I managed to integrate it with this site I am working on.
+
+I am however asking myself a few questions here. What is the best way to implement an ACL, which by the way is an Access Control List. On one hand I can do my "isAllowed" checks at the controller level, but do I want the user to get that far?
+
+The other option is to implement our acl in the bootstrap file which always runs first and so makes it easier to check access even before the user gets to the routing and all that.
+
+Now my problem is that I am a big fan of the MVC concept and by the very dynamic nature of the way I am working on this project, my ACLs are provided by a separate datastore i.e a database.
+
+I don't want to start calling in database adaptors and all that at bootstrap level, because that is just not nice. So I suppose the option here is to go with restricting access at in the init function of my controller.
+
+Par example:
+
+
+    $this->authObject = Zend_Auth::getInstance();
+            // if not logged in, redirect to login form
+            if (!$this->authObject->hasIdentity()) {
+                $returnURL = urlencode('/admin');
+                $this->_redirect('/login?returnUrl=' . $returnURL);
+            } else {
+                $this->userData = $this->authObject->getStorage();
+                $this->userRole = $this->userData->read()->role;
+            }
+    //some other instantiations here
+    if($this->accessControl->isAllowed($this->userRole)){
+                $adminNavigation = Zend_Registry::get('AdminNavigation');
+                $this->view->sideNavigation = $adminNavigation;
+
+                $uri = $this->_request->getPathInfo();
+                $this->view->uri = $uri;
+            }else{
+                $miscNavigation = Zend_Registry::get('MiscNavigation');
+                $this->view->sideNavigation = $miscNavigation;
+                $this->view->errorMessage = "This account does not have
+    enough permissions to be here";
+            }
+
+
+You may notice from all this that I have an Admin Controller and based on our isAllowed value, we provide either an admin navigation or a misc one.
+
+Obviously this can be rewritten to fit the purpose but it's an example of using ACLs at the controller level.
+
+Feedback welcome

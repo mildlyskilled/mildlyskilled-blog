@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>MySQL and Scala - Simple selects &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>MySQL and Scala - Simple selects</h1>
+      <span class="post-date">Fri, Jul 29, 2011</span>
+      <p>So after about an hour of research and experimenting, I found out how to make Scala work with MySQL without too much hassle, I found a really helpful guide <a href="https://github.com/ollekullberg/SimpleOrder">here</a>. Going down the SBT route, I first created a project and all that, then inside of the build folder I created a Scala class that ensured that when I started building, I would have the right dependencies downloaded and ready.</p>
+
+<pre><code>import sbt._
+
+class MyDataEngineProject(info: ProjectInfo)
+    extends DefaultProject(info) {
+  // Declare MySQL connector Dependency
+  val mysql = &quot;mysql&quot; % &quot;mysql-connector-java&quot; % &quot;5.1.17&quot;
+}
+</code></pre>
+
+<p>Once you have got this in project/build/MyDataEngineProject.scala, you are ready to start the connection stuff. In src/main/scala you can start creating your application here. I use the &ldquo;def main&rdquo; approach so when i start from the command line i simply pass in my parameters and I&rsquo;m ready to go:</p>
+
+<pre><code>import java.sql.{Connection, DriverManager, SQLException, ResultSet}
+
+object DataEngine {
+
+    private var driverLoaded = false
+
+    private def loadDriver()  {
+        try{
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance
+            driverLoaded = true
+        }catch{
+            case e: Exception  =&gt; {
+                println(&quot;ERROR: Driver not available: &quot; + e.getMessage)
+                throw e
+            }
+        }
+    }
+
+    def main(args: Array[String]) {
+        if (args.length &lt; 1){
+            println(&quot;No arguments provided, exitting...&quot;)
+            return
+        }
+        println (&quot;Attempting to load MySQL JBDC Driver...&quot;)
+        println
+        this.synchronized {
+          if(! driverLoaded) loadDriver()
+        }
+
+        val conString = &quot;jdbc:mysql://localhost:3306/db_name?user=&quot;+args(0)+&quot;&amp;password=&quot;+args(1)
+        classOf[com.mysql.jdbc.Driver]
+        val con = DriverManager.getConnection(conString)
+        try{
+            val handle = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)
+            val rs = handle.executeQuery(&quot;select * from auth limit 1&quot;)
+            println (&quot;Connection established...&quot;)
+            while(rs.next){
+                println(&quot;User Handle: &quot;+rs.getString(&quot;handle&quot;))
+            }
+        }catch{
+            case e: Exception  =&gt; {
+                println(&quot;ERROR: No connection: &quot; + e.getMessage)
+                throw e
+            }
+            case _ =&gt; println(&quot;A problem!&quot;)
+        }finally{
+            println(&quot;Closing connection and exiting...&quot;)
+            con.close()
+        }
+    }
+}
+</code></pre>
+
+<p>Save the file as Main.scala and you can just type in run with your db username and password as space-separated arguments and you&rsquo;re ready to go. Of course you will need to change some bits in here to reflect your database schema, but aside that it&rsquo;s that simple. In my next post I will work on inserting data and updating data as well.</p>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Content as a Service with a Micro Framework &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>Content as a Service with a Micro Framework</h1>
+      <span class="post-date">Tue, Jun 30, 2015</span>
+      <p>I had an idea of building a content management system with one of the Scala frameworks a while back and I decided on the Play Framework. In the middle of scoping things out in terms of my requirements, I decided that perhaps I did not want to build &ldquo;yet another CMS.&rdquo; My initial idea was to build something like wordpress using Play, but the more I thought about it the more I questioned what exactly I wanted to achieve. And so I decided to build one (in my spare time) that answered some of these questions</p>
+
+<p>######What exactly do I want to achieve
+I feel that a content management system should not constrain you to what the developer thinks should be the way you write content. In that there&rsquo;s a WYSIWYG editor that allows you to embed images, there&rsquo;s a gallery &ldquo;module&rdquo; that allows you to upload images to a gallery and use that gallery when composing your content.
+I imagine that the CMS should also allow you to impose some sort of hierarchy on your content so that you can nest pages within other, and allows you also to tag content for easy searches and that sort of thing.
+I imagine that the CMS should also allow you to modify whatever themes that it ships with or allow you to create your own. All of these things are noble goals and I agree with them in principle. However I find that almost invariably, CMSs are hacked to achieve some custom goal that the CMS was not designed to achieve at the time it was being developed. Either that or it was clunky in its implementation.</p>
+
+<p>So I was thinking, what if you remove the presentation layer entirely from the CMS so that the responsibility of displaying the content was with whoever was displaying it. They are responsible for composing and displaying their own content.</p>
+
+<p>To that end I started looking at content as a service offerings and I realised that this has an emerging market and there are some decent services out there<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. I was at a conference last year or so and someone was talking about another service he was involved in using the play framework I believe<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>. In any case, I was looking for a project to get my teeth into as I don&rsquo;t do as much coding as I used to. This is a good way to get going.
+######What I am going to do
+I feel like if this is going to be a JSON only service, I don&rsquo;t need any template rendering and any of those nice trimmings that come with Play Framework, session management and so on. I believe at some point I will need to have that for user management and permissions, but the core of this project is going to portable data exchange such as JSON. I suppose I could just use the Akka stack (Akka Http and persistent actors), but that would be slightly too Spartan at this point.</p>
+
+<p>I want to deploy this very easily and I don&rsquo;t want to worry too much about where it&rsquo;s going. Heroku comes to mind for this one.</p>
+
+<p>The framework should deal with routing in a nice readable way, and should not be too opinionated on how I organise my code. Doesn&rsquo;t come with too many template trimmings and I should just be able to get going with it quickly, I went for Scalatra.</p>
+
+<p>Of course I don&rsquo;t want to care about the database server I am using I want to be able abstract that away in a sensible implementation, for this I am thinking about using Slick.</p>
+
+<p>So here it is</p>
+
+<ul>
+<li>A CMS as a service</li>
+<li>Using a light, fast micro framework in Scala</li>
+<li>Slick for database work</li>
+<li>Heroku to deploy</li>
+<li><del>Some documentation on the API itself using Swagger</del>*</li>
+</ul>
+
+<p>In the next post I will expand on the organisation of the content, and perhaps foray into some implementation details.</p>
+
+<p>*Using swagger support with jackson json support breaks a lot of things</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://www.contentful.com">https://www.contentful.com</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://prismic.io/">https://prismic.io/</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

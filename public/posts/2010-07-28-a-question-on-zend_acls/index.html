@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>A question on Zend_Acls &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>A question on Zend_Acls</h1>
+      <span class="post-date">Wed, Jul 28, 2010</span>
+      <p>So I have been playing with the Zend_Acl for a while now and I managed to integrate it with this site I am working on.</p>
+
+<p>I am however asking myself a few questions here. What is the best way to implement an ACL, which by the way is an Access Control List. On one hand I can do my &ldquo;isAllowed&rdquo; checks at the controller level, but do I want the user to get that far?</p>
+
+<p>The other option is to implement our acl in the bootstrap file which always runs first and so makes it easier to check access even before the user gets to the routing and all that.</p>
+
+<p>Now my problem is that I am a big fan of the MVC concept and by the very dynamic nature of the way I am working on this project, my ACLs are provided by a separate datastore i.e a database.</p>
+
+<p>I don&rsquo;t want to start calling in database adaptors and all that at bootstrap level, because that is just not nice. So I suppose the option here is to go with restricting access at in the init function of my controller.</p>
+
+<p>Par example:</p>
+
+<pre><code>$this-&gt;authObject = Zend_Auth::getInstance();
+        // if not logged in, redirect to login form
+        if (!$this-&gt;authObject-&gt;hasIdentity()) {
+            $returnURL = urlencode('/admin');
+            $this-&gt;_redirect('/login?returnUrl=' . $returnURL);
+        } else {
+            $this-&gt;userData = $this-&gt;authObject-&gt;getStorage();
+            $this-&gt;userRole = $this-&gt;userData-&gt;read()-&gt;role;
+        }
+//some other instantiations here
+if($this-&gt;accessControl-&gt;isAllowed($this-&gt;userRole)){
+            $adminNavigation = Zend_Registry::get('AdminNavigation');
+            $this-&gt;view-&gt;sideNavigation = $adminNavigation;
+
+            $uri = $this-&gt;_request-&gt;getPathInfo();
+            $this-&gt;view-&gt;uri = $uri;
+        }else{
+            $miscNavigation = Zend_Registry::get('MiscNavigation');
+            $this-&gt;view-&gt;sideNavigation = $miscNavigation;
+            $this-&gt;view-&gt;errorMessage = &quot;This account does not have
+enough permissions to be here&quot;;
+        }
+</code></pre>
+
+<p>You may notice from all this that I have an Admin Controller and based on our isAllowed value, we provide either an admin navigation or a misc one.</p>
+
+<p>Obviously this can be rewritten to fit the purpose but it&rsquo;s an example of using ACLs at the controller level.</p>
+
+<p>Feedback welcome</p>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

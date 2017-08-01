@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Php on Mildly Skilled</title>
+    <link>/tags/php/</link>
+    <description>Recent content in Php on Mildly Skilled</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 27 Feb 2013 14:15:42 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building an API for Mokocharlie&#39;s Community photos 2</title>
+      <link>/posts/mokocharlie-photo-api-part-2/</link>
+      <pubDate>Wed, 27 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/mokocharlie-photo-api-part-2/</guid>
+      <description>Last time out I introduced a basic idea for an API, this post will be about the basic architecture of the API framework. I have been listening to and reading on API best practices published by APIGEE. Although there are one or two things about this guide that I think pidgeon-hole me into certain standards, I agree in most part with a lot of what this e book has to say, I recommend you give it a browse at some point.</description>
+    </item>
+    
+    <item>
+      <title>Building an API for Mokocharlie&#39;&#39;s Community photos part 1</title>
+      <link>/posts/2013-02-25-building-an-api-for-mokocharlies-community-photos-1/</link>
+      <pubDate>Mon, 25 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2013-02-25-building-an-api-for-mokocharlies-community-photos-1/</guid>
+      <description>After a few years of Mokocharlie creating communities around images, it has become necessary to open up this data to partners who want to provide galleries of their own but don&amp;rsquo;t have the time to go out to curate those images themselves.
+To this end the most logical path would be to develop an API that leverages the data we already have, I have chosen Laravel for this project. Over the next few weeks I will be blogging about the progress made on this project, from architecture to design decisions etc.</description>
+    </item>
+    
+    <item>
+      <title>Image Manipulation with Zend 1.x</title>
+      <link>/posts/2010-08-15-image-manipulation-with-zend/</link>
+      <pubDate>Fri, 08 Apr 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-08-15-image-manipulation-with-zend/</guid>
+      <description>I had been on the prowl for an MVC approach to image manipulation. Especially a method that did it the Zend way. In the forums and documentation for the framework the developers didn&amp;rsquo;t see a real need to implement a &amp;ldquo;Zend_Image&amp;rdquo; class in the libraries as this was already available through the PHP GD and Imagick hooks.
+Some of us however did and there are a few tutorials on how to incorporate the PHPThumb library into Zend.</description>
+    </item>
+    
+    <item>
+      <title>A note on Zend Pagination</title>
+      <link>/posts/2010-09-07-a-note-on-zend-pagination/</link>
+      <pubDate>Mon, 06 Sep 2010 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-09-07-a-note-on-zend-pagination/</guid>
+      <description>Having gone round in so many circles I finally found out that when useing Zend Pagination and the current route you are using has more than one dynamic variable i.e
+$router-&amp;gt;addRoute( &#39;listingswithpage&#39;, new Zend_Controller_Router_Route( &#39;/listing/:type/:page&#39;, array(&#39;controller&#39; =&amp;gt; &#39;listing&#39;, &#39;action&#39; =&amp;gt; &#39;index&#39;) ) );  Your pagination view helper gets a bit thrown if you go by the documentation. The first thing you need to do is find a way to specify the first page initially.</description>
+    </item>
+    
+    <item>
+      <title>Mod_Rewrite and Zend Framework 1.10.x and Ubuntu</title>
+      <link>/posts/2010-09-06-mod_rewrite-and-zend-framework-1-10-x-and-ubuntu/</link>
+      <pubDate>Mon, 06 Sep 2010 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-09-06-mod_rewrite-and-zend-framework-1-10-x-and-ubuntu/</guid>
+      <description>So all the tutorials on configuring your development server to run Zend Framework successfully say that you need to enable mod_rewrite in apache2 so that .htaccess and Zend_Router* works well.
+What they all say is to make sure it&amp;rsquo;s loaded and enabled. I will raise my hand and say it wasn&amp;rsquo;t that easy for me to find because Ubuntu lays out Apache2 a little differently from say Fedora. First of all in the /etc/apache2 folder there are a few folders to take note of.</description>
+    </item>
+    
+    <item>
+      <title>Full Text Indexing with Zend_Search_Lucene</title>
+      <link>/posts/2010-07-30-full-text-indexing-with-zend_search_lucene/</link>
+      <pubDate>Fri, 30 Jul 2010 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-07-30-full-text-indexing-with-zend_search_lucene/</guid>
+      <description>To provide a robust search facility for content you have stored on a MySQL database, you may be thinking of using MySQLs builting full text indexing facility. This comes with the MyISAM storage engine and can be slightly limiting especially if you would like to use foreign keys and such. So queries such has the following:
+ &amp;quot;SELECT *, MATCH (page_content, page_title) AGAINST (:keywords IN BOOLEAN MODE) AS relevance FROM pages WHERE MATCH (page_content, page_title) AGAINST (:keywords2 IN BOOLEAN MODE) ORDER BY relevance DESC&amp;quot;;  may not work for you although this may be how you want to go.</description>
+    </item>
+    
+    <item>
+      <title>A question on Zend_Acls</title>
+      <link>/posts/2010-07-28-a-question-on-zend_acls/</link>
+      <pubDate>Wed, 28 Jul 2010 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-07-28-a-question-on-zend_acls/</guid>
+      <description>So I have been playing with the Zend_Acl for a while now and I managed to integrate it with this site I am working on.
+I am however asking myself a few questions here. What is the best way to implement an ACL, which by the way is an Access Control List. On one hand I can do my &amp;ldquo;isAllowed&amp;rdquo; checks at the controller level, but do I want the user to get that far?</description>
+    </item>
+    
+    <item>
+      <title>Having multiple instances of Zend Navigation in a Single View Zend 1.x</title>
+      <link>/posts/2010-07-09-having-multiple-instances-of-zend-navigation-in-a-single-view/</link>
+      <pubDate>Fri, 09 Jul 2010 14:15:42 +0100</pubDate>
+      
+      <guid>/posts/2010-07-09-having-multiple-instances-of-zend-navigation-in-a-single-view/</guid>
+      <description>so I have been playing around with the Zend Framework rather extensively over the past few weeks and it has been a very rewarding experience.
+I am posting this here because it was a bit difficult finding a work around for the issue I describe below.
+Zend Navigation had been giving me a lot of problems especially because I could not get the Navigation object passed to my view object to render two different navigation configs.</description>
+    </item>
+    
+  </channel>
+</rss>

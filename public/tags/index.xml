@@ -2,13 +2,194 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Mildly Skilled</title>
-    <link>http://blog.mildlyskilled.com/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Mildly Skilled</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
+    <lastBuildDate>Mon, 31 Jul 2017 14:15:42 +0100</lastBuildDate>
     
-	<atom:link href="http://blog.mildlyskilled.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android</title>
+      <link>/tags/android/</link>
+      <pubDate>Mon, 31 Jul 2017 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Api</title>
+      <link>/tags/api/</link>
+      <pubDate>Wed, 27 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Content</title>
+      <link>/tags/content/</link>
+      <pubDate>Tue, 30 Jun 2015 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/content/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>/tags/django/</link>
+      <pubDate>Thu, 23 Oct 2014 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Heroku</title>
+      <link>/tags/heroku/</link>
+      <pubDate>Tue, 30 Jun 2015 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/heroku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Laravel</title>
+      <link>/tags/laravel/</link>
+      <pubDate>Mon, 25 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/laravel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Latex</title>
+      <link>/tags/latex/</link>
+      <pubDate>Fri, 08 Apr 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Fri, 29 Jul 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mobile</title>
+      <link>/tags/mobile/</link>
+      <pubDate>Mon, 31 Jul 2017 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/mobile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mokocharlie</title>
+      <link>/tags/mokocharlie/</link>
+      <pubDate>Wed, 27 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/mokocharlie/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>/tags/mysql/</link>
+      <pubDate>Fri, 29 Jul 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Php</title>
+      <link>/tags/php/</link>
+      <pubDate>Wed, 27 Feb 2013 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Proguard</title>
+      <link>/tags/proguard/</link>
+      <pubDate>Sun, 12 Feb 2012 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/proguard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Thu, 23 Oct 2014 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>React</title>
+      <link>/tags/react/</link>
+      <pubDate>Mon, 31 Jul 2017 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scala</title>
+      <link>/tags/scala/</link>
+      <pubDate>Tue, 30 Jun 2015 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scalatra</title>
+      <link>/tags/scalatra/</link>
+      <pubDate>Tue, 30 Jun 2015 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/scalatra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Slick</title>
+      <link>/tags/slick/</link>
+      <pubDate>Tue, 30 Jun 2015 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/slick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>/tags/ubuntu/</link>
+      <pubDate>Fri, 08 Apr 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zend</title>
+      <link>/tags/zend/</link>
+      <pubDate>Fri, 08 Apr 2011 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/zend/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

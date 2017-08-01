@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Using images in LaTeX &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>Using images in LaTeX</h1>
+      <span class="post-date">Fri, Apr 8, 2011</span>
+      <p>Note to self and perhaps others who might be wondering why your images are not displaying in your tex document. Despite using the correct syntax:</p>
+
+<p><code>
+    \begin{figure}[htb]
+        \begin{center}
+            \includegraphics{image.png}
+        \end{center}
+        \caption{Fig 1: image}
+        \label{fig1}
+    \end{figure}
+</code></p>
+
+<p>You may find a box with with only the image path being displayed as your image. Please check that you are not using the &ldquo;draft&rdquo; argument at the top of your document when specifying your document class. A bit like</p>
+
+<pre><code>\documentclass[12pt,a4paper,draft]{article}
+</code></pre>
+
+<p>Make sure there is no &ldquo;draft&rdquo; in there so that it reads</p>
+
+<pre><code>\documentclass[12pt,a4paper]{article}
+</code></pre>
+
+<p>Spent about half an hour trying to figure out why everyone else&rsquo;s images were displaying except mine.</p>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>

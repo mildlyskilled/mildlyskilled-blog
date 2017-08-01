@@ -1,8 +1,9 @@
-baseURL = "http://mildlyskilled.netlify.com/"
+baseURL = ""
 languageCode = "en-gb"
 title = "Mildly Skilled"
 theme = "hyde"
 publishDir = "public"
+relativeUrls = true
 
 [taxonomies]
   category = "categories"

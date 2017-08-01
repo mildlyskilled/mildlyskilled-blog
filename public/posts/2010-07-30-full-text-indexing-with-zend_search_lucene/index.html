@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.25.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Full Text Indexing with Zend_Search_Lucene &middot; Mildly Skilled</title>
+  
+
+  
+  <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="stylesheet" href="css/poole.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="../../favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Mildly Skilled" />
+</head>
+
+<body class=" layout-reverse">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href=""><h1>Mildly Skilled</h1></a>
+      <p class="lead">
+       Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/ 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. </p>
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+      <h1>Full Text Indexing with Zend_Search_Lucene</h1>
+      <span class="post-date">Fri, Jul 30, 2010</span>
+      <p>To provide a robust search facility for content you have stored on a MySQL database, you may be thinking of using MySQLs builting full text indexing facility. This comes with the MyISAM storage engine and can be slightly limiting especially if you would like to use foreign keys and such. So queries such has the following:</p>
+
+<pre><code> &quot;SELECT *, MATCH (page_content, page_title) AGAINST
+(:keywords IN BOOLEAN MODE) AS relevance
+FROM pages WHERE MATCH (page_content, page_title) AGAINST
+(:keywords2 IN BOOLEAN MODE) ORDER BY relevance DESC&quot;;
+</code></pre>
+
+<p>may not work for you although this may be how you want to go.</p>
+
+<p>The best way I have found is to leave the indexing to another service in general. Enter Zend_Search_Lucene, i believe this is a PHP port of the Apache Lucene project written in Java&hellip;.</p>
+
+<p>So basically we start by creating our index and document, personally i like to remove my personal classes and all that from the Zend Application as often as I can that way it&rsquo;s mostly untainted and I can then use the same Zend Application with multiple custom code bases, enough on that already. However you chose to go you need a version of the following:</p>
+
+<pre><code>class My_SearchService {
+
+    protected
+    $indexPath,
+    $pageService,
+    $pageIndexPath,
+    $newsIndexPath,
+    $document,
+    $pageIndex;
+
+    public function setIndexPath($indexPath) {
+        $this-&gt;indexPath = $indexPath;
+    }
+
+    public function __construct($indexPath = NULL) {
+        if (is_null($indexPath)) {
+            $indexPath = APPLICATION_PATH . '/indexes/';
+        }
+        $this-&gt;setIndexPath($indexPath);
+        $this-&gt;pageIndexPath = $this-&gt;indexPath . 'pageindex';
+        $this-&gt;newsindexPath = $this-&gt;indexPath . 'newsindex';
+        $this-&gt;pageService = new My_PageService();
+    }
+
+    public function createPageIndex() {
+        $this-&gt;pageIndex = Zend_Search_Lucene::create($this-&gt;pageIndexPath);
+// this is a simple Zend_Db_Table object returning data from my database
+        $pages = $this-&gt;pageService-&gt;getAllPages()-&gt;toArray();
+
+        foreach ($pages as $page) {
+            $this-&gt;pageIndex
+-&gt;addDocument(new My_Controller_Plugin_PageIndexer($page));
+        }
+
+        // commit index
+        $this-&gt;pageIndex-&gt;commit();
+    }
+
+}
+</code></pre>
+
+<p>This is assuming you have a folder structure that looks a bit like</p>
+
+<p>/applications
+&ndash;/everything else here
+/library
+&ndash;/My
+&ndash;/PageService.php
+&mdash;&ndash;/Controller
+&mdash;&mdash;&mdash;-/Plugin
+&mdash;&mdash;&mdash;&mdash;&ndash;/PageIndexer.php</p>
+
+<p>Our PageIndexer is just out extension of Zend_Search_Lucene_Document this is what we will be querying for all our page search needs.</p>
+
+<pre><code>/**
+ * Description of PageIndexer
+ *
+ * @author kaning
+ */
+class STEMNET_Controller_Plugin_PageIndexer extends Zend_Search_Lucene_Document {
+
+    /**
+     * Constructor. Creates our indexable document and adds all
+     * necessary fields to it using the passed in document
+     */
+    public function __construct($document) {
+       $this-&gt;addField(Zend_Search_Lucene_Field::Keyword('page_id', $document['page_id']));
+        $this-&gt;addField(Zend_Search_Lucene_Field::UnIndexed('name', $document['page_name']));
+        $this-&gt;addField(Zend_Search_Lucene_Field::UnIndexed('created', $document['publishdate']));
+        $this-&gt;addField(Zend_Search_Lucene_Field::UnIndexed('caption', $document['page_caption']));
+        $this-&gt;addField(Zend_Search_Lucene_Field::Text('title', $document['page_title']));
+        $this-&gt;addField(Zend_Search_Lucene_Field::UnStored('content', $document['page_content']));
+    }
+
+}
+</code></pre>
+
+<p>Not much introduction here besides the fact that I am adding the fields I want in my index bear in mind that the field data I am adding simply corresponds to what the Zend_Db_table select query returned for me.</p>
+
+<p>Bear in mind that you really need to create the index only once. You will be updating it in subsequent times.</p>
+
+<p>I formed the basis of this post from this <a href="http://www.phpriot.com/articles/zend-search-lucene">tutorial.</a> Look it up for more information</p>
+
+<p>class STEMNET_SearchService {</p>
+
+<p>protected
+$indexPath,
+$pageService,
+$pageIndexPath,
+$newsIndexPath,
+$document,
+$pageIndex;</p>
+
+<p>public function setIndexPath($indexPath) {
+$this-&gt;indexPath = $indexPath;
+}</p>
+
+<p>public function __construct($indexPath = NULL) {
+if (is_null($indexPath)) {
+$indexPath = APPLICATION_PATH . &lsquo;/indexes/&rsquo;;
+}
+$this-&gt;setIndexPath($indexPath);
+$this-&gt;pageIndexPath = $this-&gt;indexPath . &lsquo;pageindex&rsquo;;
+$this-&gt;newsindexPath = $this-&gt;indexPath . &lsquo;newsindex&rsquo;;
+$this-&gt;pageService = new STEMNET_PageService();
+}</p>
+
+<p>public function createPageIndex() {
+$this-&gt;pageIndex = Zend_Search_Lucene::create($this-&gt;pageIndexPath);
+$pages = $this-&gt;pageService-&gt;getAllPages();</p>
+
+<p>foreach ($pages as $page) {
+$this-&gt;pageIndex-&gt;addDocument(new STEMNET_Controller_Plugin_PageIndexer($page));
+}</p>
+
+<p>// commit index
+$this-&gt;pageIndex-&gt;commit();
+}</p>
+
+<p>}</p>
+
+    </div>
+
+			
+		</div>
+
+</body>
+</html>
