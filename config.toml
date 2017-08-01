@@ -2,7 +2,7 @@ baseURL = "http://blog.mildlyskilled.com/"
 languageCode = "en-gb"
 title = "Mildly Skilled"
 theme = "hyde"
-publishDir = "docs"
+publishDir = "public"
 
 [taxonomies]
   category = "categories"
