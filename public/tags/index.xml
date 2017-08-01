@@ -75,6 +75,15 @@
     </item>
     
     <item>
+      <title>Life</title>
+      <link>/tags/life/</link>
+      <pubDate>Tue, 12 Aug 2014 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Linux</title>
       <link>/tags/linux/</link>
       <pubDate>Fri, 29 Jul 2011 14:15:42 +0100</pubDate>
@@ -107,6 +116,15 @@
       <pubDate>Fri, 29 Jul 2011 14:15:42 +0100</pubDate>
       
       <guid>/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pearls</title>
+      <link>/tags/pearls/</link>
+      <pubDate>Tue, 12 Aug 2014 14:15:42 +0100</pubDate>
+      
+      <guid>/tags/pearls/</guid>
       <description></description>
     </item>
     

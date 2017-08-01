@@ -1,7 +1,7 @@
 baseURL = ""
 languageCode = "en-gb"
 title = "Mildly Skilled"
-theme = "hyde"
+theme = "icarus"
 publishDir = "public"
 relativeUrls = true
 
@@ -9,6 +9,40 @@ relativeUrls = true
   category = "categories"
   tag = "tags"
 
+[permalinks]
+  post = "/:year/:month/:day/:slug"
+
 [params]
   description = "Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/"
   author = "Kwabena Aning"
+  paginate = 10
+  footnotereturnlinkcontents = "↩"
+  avatar = "css/images/avatar.png"
+  gravatar = "kwabena.aning@gmail.com"
+  disable_mathjax = true
+  date_format = "Mon, 02 January 2006"
+
+[[params.menu]]
+  before = true
+  label = "Home"
+  link = "/"
+
+[[params.menu]]
+  before = false
+  label = "Tags"
+  link = "/"
+
+[params.profile]
+  follow_button = "https://github.com/mildlyskilled"
+
+[params.widgets]
+  recent_articles = true
+  categories = true
+  tags = true
+  tag_cloud = true
+
+[social]
+  github = "mildlyskilled"
+  instagram = "KwabenaAning"
+  linkedin = "kaning"
+  twitter = "KwabenaAning"
