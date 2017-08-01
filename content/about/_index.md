@@ -9,10 +9,11 @@ author: "Kwabena Aning"
 The proliferation of the concurrent models, and frameworks that support these models have been a clear sign of the direction of software design and architecture; this model inherently supports the properties required for distributed and concurrent computing. My research area is in concurrent software design and architectures - with an inclination towards the Actor Model of Concurrent Computing. I am also a software development team lead, and have been interested in building software for a very long time.
 
 I'm mostly interested in:
-- Programming Languages
-- Software Design and Engineering
-- Concurrent Systems and Models
-- Asynchronous Processing
+
+* Programming Languages
+* Software Design and Engineering
+* Concurrent Systems and Models
+* Asynchronous Processing
 
 I also work as a Software Engineer at IMG Gaming using predominantly Scala and Akka
 
