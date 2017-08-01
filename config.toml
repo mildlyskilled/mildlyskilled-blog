@@ -11,5 +11,4 @@ relativeUrls = true
 
 [params]
   description = "Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/"
-  layoutReverse = true
   author = "Kwabena Aning"
