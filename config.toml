@@ -28,9 +28,14 @@ relativeUrls = true
   link = "/"
 
 [[params.menu]]
+    before = false
+    label = "About"
+    link = "about/"
+
+[[params.menu]]
   before = false
   label = "Tags"
-  link = "/"
+  link = "tags/"
 
 [params.profile]
   follow_button = "https://github.com/mildlyskilled"
