@@ -1,5 +1,5 @@
 ---
-title: "Why We Program"
+title: "Why We Do It"
 date: 2018-07-03T11:03:00+01:00
 draft: false
 author: "Kwabena Aning"
