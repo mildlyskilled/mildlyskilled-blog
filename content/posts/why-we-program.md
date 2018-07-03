@@ -9,6 +9,7 @@ tags: ["programming", "motivation"]
 I have often procrastinated about sharing my motivations - the "why" through which I drive myself. This is a massive deviation from my usual posts as I generally keep my posts as close to the tech as possible. This however feels different - In that recent events in my personal life has driven me to evaluate what is important and what isn't. I have found myself thinking about priorities, and at the core of prioritisation is the notion that we have a firm grasp of the reason we do the things we do in our lives.
 
 Some years ago, I lived by a very simple ethos. Create things that you are proud of - things that make your world a better place. Take the journey of making yourself a better person and a better engineer. On that path, if you should come across a fellow traveller, be nice, help out when you can and make your collective journey as pleasant as you can. I believe I still live by those principles, but on a budget. Not because I have lost the hunger... one of the most fulfilling things I have ever done, and continue to do is solving problems behind a computer and doing it well (consistently, repeatably, and as fault tolerant as possible). There comes a time however when 
+
  * Finding the time to do it to my ever increasing quality standards becomes difficult
 
  * Finding the energy to do it to my ever increasing quality standards becomes difficult
