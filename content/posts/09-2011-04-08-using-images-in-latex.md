@@ -4,6 +4,7 @@ date: 2011-04-08T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["latex", "linux", "ubuntu"]
+type: "post"
 ---
 
 Note to self and perhaps others who might be wondering why your images are not displaying in your tex document. Despite using the correct syntax:

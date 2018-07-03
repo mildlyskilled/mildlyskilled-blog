@@ -4,6 +4,7 @@ date: 2011-07-29T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["scala", "mysql", "linux"]
+type: "post"
 ---
 
 So after about an hour of research and experimenting, I found out how to make Scala work with MySQL without too much hassle, I found a really helpful guide [here](https://github.com/ollekullberg/SimpleOrder). Going down the SBT route, I first created a project and all that, then inside of the build folder I created a Scala class that ensured that when I started building, I would have the right dependencies downloaded and ready.

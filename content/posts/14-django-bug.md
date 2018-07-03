@@ -4,6 +4,7 @@ date: 2014-10-23T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["python", "django"]
+type: "post"
 ---
 After spending hours trying to debug why my settings file was not being found I stumbled across this
 

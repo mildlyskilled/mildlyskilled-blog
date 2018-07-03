@@ -4,6 +4,7 @@ date: 2011-04-08T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP"]
+type: "post"
 ---
 
 

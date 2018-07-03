@@ -1,4 +1,4 @@
-baseURL = "https://www.mildlyskilled.com"
+baseURL = "https://localhost/"
 languageCode = "en-gb"
 title = "Mildly Skilled"
 theme = "icarus"

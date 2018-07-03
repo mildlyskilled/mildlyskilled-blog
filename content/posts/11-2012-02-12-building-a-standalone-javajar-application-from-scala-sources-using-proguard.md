@@ -4,6 +4,7 @@ date: 2012-02-12T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["scala", "proguard"]
+type: "post"
 ---
 
 After about an hour of digging around and looking for a way to package a simulation I wrote in Scala for a coleague, I came across this process of doing it. I have reduced it down to a bash script which will be at the bottom of this post but I thought I should go through the steps a bit as the script makes certain assumptions.

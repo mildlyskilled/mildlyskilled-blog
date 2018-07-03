@@ -4,6 +4,7 @@ date: 2010-07-30T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP"]
+type: "post"
 ---
 
 To provide a robust search facility for content you have stored on a MySQL database, you may be thinking of using MySQLs builting full text indexing facility. This comes with the MyISAM storage engine and can be slightly limiting especially if you would like to use foreign keys and such. So queries such has the following:

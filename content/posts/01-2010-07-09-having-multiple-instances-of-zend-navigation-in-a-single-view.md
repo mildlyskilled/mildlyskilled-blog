@@ -4,6 +4,7 @@ date: 2010-07-09T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP"]
+type: "post"
 ---
 
 so I have been playing around with the Zend Framework rather extensively over the past few weeks and it has been a very rewarding experience.

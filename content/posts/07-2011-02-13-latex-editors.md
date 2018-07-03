@@ -4,6 +4,7 @@ date: 2011-02-13T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["latex", "linux", "ubuntu"]
+type: "post"
 ---
 
 I have been looking into LaTeX (pronounced La Tek) editors for my writing now and after a lot of trials and tribulations, I finally settled on LateXila.

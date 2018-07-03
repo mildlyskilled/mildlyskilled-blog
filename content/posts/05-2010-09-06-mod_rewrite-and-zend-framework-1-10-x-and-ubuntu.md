@@ -4,6 +4,7 @@ date: 2010-09-06T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP", "linux", "ubuntu"]
+type: "post"
 ---
 
 

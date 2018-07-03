@@ -4,6 +4,7 @@ date: 2015-06-30T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["scala", "scalatra", "content", "slick", "heroku"]
+type: "post"
 ---
 I had an idea of building a content management system with one of the Scala frameworks a while back and I decided on the Play Framework. In the middle of scoping things out in terms of my requirements, I decided that perhaps I did not want to build "yet another CMS." My initial idea was to build something like wordpress using Play, but the more I thought about it the more I questioned what exactly I wanted to achieve. And so I decided to build one (in my spare time) that answered some of these questions
 

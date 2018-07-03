@@ -4,6 +4,7 @@ date: 2010-07-28T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP"]
+type: "post"
 ---
 
 So I have been playing with the Zend_Acl for a while now and I managed to integrate it with this site I am working on.

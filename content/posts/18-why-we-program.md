@@ -4,6 +4,7 @@ date: 2018-07-03T11:03:00+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["programming", "motivation"]
+type: "post"
 ---
 
 I have often procrastinated about sharing my motivations - the "why" through which I drive myself. This is a massive deviation from my usual posts as I generally keep my posts as close to the tech as possible. This however feels different - In that recent events in my personal life has driven me to evaluate what is important and what isn't. I have found myself thinking about priorities, and at the core of prioritisation is the notion that we have a firm grasp of the reason we do the things we do in our lives.

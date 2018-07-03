@@ -4,6 +4,7 @@ date: 2013-02-25T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["mokocharlie", "mobile", "api", "php", "laravel"]
+type: "post"
 ---
 
 After a few years of [Mokocharlie](http://mokocharlie.com) creating communities around images, it has become necessary to open up this data to partners who want to provide galleries of their own but don't have the time to go out to curate those images themselves.

@@ -4,6 +4,7 @@ date: 2013-02-27T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["mokocharlie", "mobile", "api", "php"]
+type: "post"
 ---
 
 Last time out I introduced a basic idea for an API, this post will be about the basic architecture of the API framework. I have been listening to and reading on API best practices published by [APIGEE](http://offers.apigee.com/ebook-api-design-yt/, "Web API Design"). Although there are one or two things about this guide that I think pidgeon-hole me into certain standards, I agree in most part with a lot of what this e book has to say, I recommend you give it a browse at some point.

@@ -4,6 +4,7 @@ date: 2017-07-31T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["android", "mobile", "react"]
+type: "post"
 ---
 
 After a massive break from hacking on Mokocharlie, I felt like I needed to get my mind of some other things and perhaps do something that I found to be fun on a weekend.

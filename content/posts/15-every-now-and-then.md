@@ -4,6 +4,7 @@ date: 2014-08-12T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["life", "pearls"]
+type: "post"
 ---
 I generally don't spend that much time on Quora. I do get the emails but I'm just not that interested in the questions or answers for that matter to spend that much time except this particular one.
 
