@@ -13,7 +13,7 @@ relativeUrls = true
   post = "/:year/:month/:day/:slug"
 
 [params]
-  description = "Software development for the mildly skilled. A blog maintained by Kwabena Aning, whose opinions are his own :/"
+  description = "Software development for the mildly skilled. A blog maintained by me Kwabena Aning, suffice it to say these are my opinions and I share them freely with the understanding that you acknowledge that they are my own."
   author = "Kwabena Aning"
   paginate = 10
   footnotereturnlinkcontents = "↩"
