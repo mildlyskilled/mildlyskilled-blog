@@ -14,7 +14,7 @@ Some years ago, I lived by a very simple ethos. Create things that you are proud
 
  * Finding the energy to do it to my ever increasing quality standards becomes difficult
 
-And so I like to always remind myself why I started this in the first place and the best reminder for me is an essay that Linus Torvalds wrote a very long time ago. I keep a copy with me and from time to time I read it to remember... it goes like this.
+And so I like to always remind myself why I started this in the first place and the best reminder for me is an essay that Linus Torvalds wrote a very long time ago. I keep a copy with me and from time to time I read it to remember... it goes like this (apologies if you have read this already).
 
 
 
