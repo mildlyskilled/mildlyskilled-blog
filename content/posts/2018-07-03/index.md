@@ -1,13 +1,13 @@
----
-title: "Why We Do It"
-date: 2018-07-03T11:03:00+01:00
-draft: false
-author: "Kwabena Aning"
-tags: ["programming", "motivation"]
-type: "post"
-banner: "banner.jpg"
----
-![alt text][desktop]
++++
+title = "Why We Do It"
+date = 2018-07-03T11:03:00+01:00
+draft = false
+author = "Kwabena Aning"
+tags = ["programming", "motivation"]
+type = "post"
+banner = "images/banner.jpg"
++++
+![Finding inspiration when pressed for time can be challenging][desktop]
 
 I have often procrastinated about sharing my motivations - the "why" through which I drive myself. This is a massive deviation from my usual posts as I generally keep my posts as close to the tech as possible. This however feels different - In that recent events in my personal life has driven me to evaluate what is important and what isn't. I have found myself thinking about priorities, and at the core of prioritisation is the notion that we have a firm grasp of the reason we do the things we do in our lives.
 
@@ -52,4 +52,4 @@ And so I like to always remind myself why I started this in the first place and 
 
 Finding the inspiration to be creative, in my opinion cannot be forced. It can however be encouraged. I suppose the thing I am trying to get to here is... remember why you started in the first place, and eveything falls into place.
 
-[desktop]: ./images/2018-07-03/banner.jpg "Logo Title Text 2"
+[desktop]: images/banner.jpg "Latest workspace"
