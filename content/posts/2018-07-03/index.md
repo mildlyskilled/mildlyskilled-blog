@@ -5,7 +5,6 @@ draft: false
 author: "Kwabena Aning"
 tags: ["programming", "motivation"]
 type: "post"
-banner: "banner.jpg"
 ---
 ![alt text][desktop]
 
