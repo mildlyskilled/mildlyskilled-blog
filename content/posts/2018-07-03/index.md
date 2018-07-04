@@ -5,7 +5,7 @@ draft: false
 author: "Kwabena Aning"
 tags: ["programming", "motivation"]
 type: "post"
-banner: "images/banner.jpg"
+banner: "posts/2018-07-03/images/banner.jpg"
 ---
 ![Finding inspiration when pressed for time can be challenging][desktop]
 
