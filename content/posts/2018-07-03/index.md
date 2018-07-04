@@ -7,7 +7,6 @@ tags: ["programming", "motivation"]
 type: "post"
 banner: "posts/2018-07-03/images/banner.jpg"
 ---
-![Finding inspiration when pressed for time can be challenging][desktop]
 
 I have often procrastinated about sharing my motivations - the "why" through which I drive myself. This is a massive deviation from my usual posts as I generally keep my posts as close to the tech as possible. This however feels different - In that recent events in my personal life has driven me to evaluate what is important and what isn't. I have found myself thinking about priorities, and at the core of prioritisation is the notion that we have a firm grasp of the reason we do the things we do in our lives.
 
@@ -51,5 +50,3 @@ And so I like to always remind myself why I started this in the first place and 
 > Maybe the story is apocryphal, but the point is clear: A great mathematician doesn't solve a problem the long and boring way because he sees what the real pattern is behind the question, and applies that pattern to find the answer in a much better way. The same is definitely true in computer science, too. Sure, you can just write a program that calculates the sum. On today's computers that would be a snap. But a great programmer would know what the answer is simply by being clever. He would know to write a beautiful program that attacks the problem in a new way that, in the end, is the right way. It's still hard to explain what can be so fascinating about beating your head against the wall for three days, not knowing how to solve something the better way, the beautiful way. But once you find that way, it's the greatest feeling in the world.
 
 Finding the inspiration to be creative, in my opinion cannot be forced. It can however be encouraged. I suppose the thing I am trying to get to here is... remember why you started in the first place, and eveything falls into place.
-
-[desktop]: images/banner.jpg "Latest workspace"
