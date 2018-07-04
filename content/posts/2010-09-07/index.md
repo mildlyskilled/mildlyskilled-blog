@@ -1,6 +1,6 @@
 ---
 title: "Mod_Rewrite and Zend Framework 1.10.x and Ubuntu"
-date: 2010-09-06T14:15:42+01:00
+date: 2010-09-07T14:15:42+01:00
 draft: false
 author: "Kwabena Aning"
 tags: ["Zend", "PHP", "linux", "ubuntu"]
