@@ -4,7 +4,7 @@ title = "Mildly Skilled"
 theme = "icarus"
 publishDir = "public"
 relativeUrls = true
-googleAnalytis = "UA-121895834-1"
+googleAnalytics = "UA-121895834-1"
 
 [taxonomies]
   category = "categories"
