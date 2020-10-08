@@ -5,4 +5,4 @@ HUGO_ENABLEGITINFO = "true"
 
 [build]
 publish = "public"
-command = "hugo --gc --minify
+command = "hugo --gc --minify"
