@@ -3,6 +3,7 @@ title: "Musings on Building a Data Catalog(ue)"
 date: 2020-10-08T17:15:10+01:00
 tags: ["programming", "bigdata", "engineering"]
 draft: false
+author: "Kwabena Aning"
 type: "post"
 banner: "posts/2020-10-08/images/header.jpg"
 ---

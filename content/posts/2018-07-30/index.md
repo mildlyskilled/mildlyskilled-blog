@@ -4,6 +4,7 @@ date: 2018-07-30T15:44:10+01:00
 tags: ["programming", "mobile", "mokocharlie"]
 draft: false
 type: "post"
+author: "Kwabena Aning"
 banner: "posts/2018-07-30/images/screen.png"
 ---
 

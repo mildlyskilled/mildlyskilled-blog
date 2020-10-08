@@ -3,4 +3,7 @@
 	url = https://github.com/spf13/hyde.git
 [submodule "themes/icarus"]
 	path = themes/icarus
-	url = https://github.com/digitalcraftsman/hugo-icarus-theme.git
+	url = https://gitlab.com/toryanderson/hugo-icarus.git
+[submodule "themes/hugo-future-imperfect"]
+	path = themes/hugo-future-imperfect
+	url = https://github.com/jpescador/hugo-future-imperfect.git
