@@ -38,3 +38,5 @@ Building a spark job should be as simple as querying an endpoint for the locatio
 As we had already dipped our toes in the data lake concept, this would be a starting point. It became about understanding the boundaries of the data lake (if there were any). To understanding the infrastructure that held the lake together. (S3 buckets, mysql databases, oracle databases, ReST APIs, Redis Clusters, everything). This was the challenge to chart this infrastructure and how data arrived and churned within those places.
 
  I don't know how many parts this series is going to be but I would like to share my thoughts on how we approached this problem highlighting that I imagine this is stil work in progress but while I was still leading this project I feel like we made some really good progress to delivering a scalable solution.
+
+ [Part II gives a big picture overview of this solution.](/posts/2021-04-15/)

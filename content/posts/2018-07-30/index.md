@@ -30,7 +30,7 @@ I have to say, I never really got stuck on anything. There are so many resources
 
 ## The Application
 
-This was pretty much very easy to scaffold and proceed with as there are flutter commands for just about anything you need boiler plate for. The things that took the longest time to set up were my emulators. Once these were done I was able to get very quick feedback on what I was doing because flutter allows you to "hot reload" your code.
+This was pretty much very easy to scaffold and proceed with as there are flutter commands for just about anything you need boiler plate for. The things that took the longest time to set up were my emulators. Once these were done I was able to get very quick feedback on what I was doing because flutter allows you to "hot reload" your code. The flutter framework itself consists almost solely of the concept of widgets and widget trees. This allows for nesting (sensible) UI elements, and also being able to traverse that tree for things like state management, and also for context. 
 
 ## Conclusions
 
