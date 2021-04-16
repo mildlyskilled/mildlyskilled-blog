@@ -40,7 +40,7 @@ We had identified that a majority of our consumers would be consuming these data
 
 For us the answer was creating roles in our VPC per dataset, and allowing the consumers to assume those roles when they were requesting access to those datasets. Now the IAM roles were then installed into the publishers VPC account as part of the `terraform install` operation that the publishers team would run.
 
-![System Overview](/images/atlas.png)
+![System Overview](/posts/2021-04-15/images/atlas.png)
 
 So far the components in red are the new components we create. A dataset role + access policy and a lambda to push notifications to us when the metadata is updated.
 
