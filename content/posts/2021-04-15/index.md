@@ -7,12 +7,12 @@ author: "Kwabena Aning"
 type: "post"
 ---
 
-[In part one](/posts/2020-10-08/) I blogged about the motivation, and the audience for a data catalog (Atlas). This time I will be talking about the approach, and hopefully describe the system design and reasons that drove the decisions we made.
+[In part one](/posts/2020-10-08/) I blogged about the motivation, and the audience for a data catalog (Atlas). This time I will be talking about the approach, the lay of the land, and hopefully describe the system design and reasons that drove the decisions we made.
 
 Start with the Data
 ---
 
-Fistly, looking at the data that we held, it was going clear that there was going to have to be some initial investment of effort in bringing
+Firstly, looking at the data that we held, it was going clear that there was going to have to be some initial investment of effort in bringing
 these structured and semi-structured datasets to an indexable catalogue. Some teams (publishers) already had spark processes to "cook" their raw data into formats that were easier to consume such as Parquet. Those were going to be easy to index and provide access to. There were other datasets that would have to br provided as-is for example .tar.gz snapshots of logs and such.
 
 Snapshots versus Mutating Datasets
@@ -20,7 +20,7 @@ Snapshots versus Mutating Datasets
 
 Some datasets were conveniently presented as snapshots for example daily, weekly, or indeed monthly snapshots... some were even annual snapshots. This implied that we could provide versions of these datasets without fear of presenting the wrong metadata (e.g. filesize) to the user. Mutating datasets would have to be presented with caveats to the consumer.
 
-Metadata, is provided by the data producer. After all, who is best suited to tell us about the data than the person producing it? Some of that metadata we can deduce by reading things like schemas but the 'softer' bits of information is best produced by the producer. This can be done at the time the new dataset is being cooked, or when it's deposited in the publisher bucket. We could have dataset level metadata, or snapshot level metadata. Where both exist, the snapshot level takes preference.
+Metadata, is provided by the data producer. After all, who is best suited to tell us about the data than the person producing it? Some of that metadata we can deduce by reading things like schemas but the 'softer' bits of information is best produced by the producer. This can be done at the time the new dataset is being cooked, or when it's deposited in the publisher bucket. We could have dataset level metadata, or snapshot level metadata. Where both exist, the snapshot level takes precedence.
 
 The data was promarily stored in S3 buckets so we already had a good baseline for the technical considerations we would need to make in terms of permissioning and such. We also have to bear in mind that these teams all had their own AWS accounts and VPCs so we would have to cross over into those VPCs to get their data to our catalog. More on that later.
 
@@ -47,6 +47,8 @@ So far the components in red are the new components we create. A dataset role + 
 The Brokers
 ---
 
-In our own VPC we had three APis... One that was responsible for receiving published dataset information, the second was actually a 'headless' CKAN installation the third (Atlas) was for everything else. Which included handling dataset requests, presenting data to be rendered by a separate UI and also a presenting the data layer for moderating the requests made to publishers. By integrating the Atlas API into our existing SAML authentication service we were able to leverage concepts such as groups and users from Active Directory for permissions and Authentication. We were also able to queue up commands for lambdas to do things like adding external users to the list of users able to assume roles that had access to the datasets that had been registered and published.
+In our own VPC we had three APis... One that was responsible for receiving published dataset information, the second was actually a 'headless' CKAN installation to handle the indexing, searching, and retrieval of datasets. The third (Atlas) was for everything else. Which included handling dataset requests, presenting data to be rendered by a separate react UI and also a presenting the data layer for moderating the requests made to publishers. This API was also responsible for onboarding publishers onto the system as well. Basically by providing us with minimal information about where their datasets lived, we would be able to run some infrastructure code (through AWS lambda) to provision access to those datasets, and generate a template for publishers' terraform variables.
 
-In the next installment I will try and tie this all together with some simple user journeys and a bit more indepth descriptions of how we put our own infrastructure together to make the user journeys work.
+By integrating the Atlas API into our existing SAML authentication service we were able to leverage concepts such as groups and users from Active Directory for permissions and Authentication. We were also able to queue up commands for lambdas to do things like adding external users to the list of users able to assume roles that had access to the datasets that had been registered and published.
+
+In the next installment I will try and tie this all together with some simple user journeys and a bit more in-depth descriptions of how we put our own infrastructure together to make the user journeys work.
