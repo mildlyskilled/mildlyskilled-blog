@@ -3,4 +3,5 @@
 	url = https://github.com/spf13/hyde.git
 [submodule "themes/hugo-future-imperfect"]
 	path = themes/hugo-future-imperfect
-	url = https://github.com/jpescador/hugo-future-imperfect.git
+	url = https://github.com/kaning/hugo-future-imperfect.git
+
