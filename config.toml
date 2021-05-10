@@ -36,6 +36,7 @@ socialShareEmail     = false
   date_format = "Mon, 02 January 2006"
   mainSections = ["posts"]
   includeReadingTime = true
+  viewMorePostLink = false
 
 [[params.menu]]
   before = true
