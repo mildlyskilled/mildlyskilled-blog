@@ -432,8 +432,19 @@ fun feed(feedService: FeedService): Array<RoutingHttpHandler> =
 
             },
             "/import" bind Method.POST to { request ->
-                println(request.body)
-                Response(Status.ACCEPTED).body("Feed uploaded")
+                val importLens = Body.auto<ImportRequest>().toLens()
+                val importRequest = importLens(request)
+                try {
+                    val import = String(Base64.getDecoder().decode(importRequest.payload))
+                    val opml = Parser.parseOpml(Request(Method.GET, "/").body(import))
+                    if (runBlocking { feedService.saveFeed(importRequest.readerId, opml) }) {
+                        messageLens(Message("Successfully processed import"), Response(Status.ACCEPTED))
+                    } else {
+                        messageLens(Message("Could not parse and import feed"), Response(Status.BAD_REQUEST))
+                    }
+                } catch (e: IllegalArgumentException) {
+                    messageLens(Message("Invalid payload"), Response(Status.BAD_REQUEST))
+                }
             }
         )
     )
