@@ -51,15 +51,67 @@ Testing
 As with any good projects you start of with... we should begin with tests. It allows us to be clear on what the service should be doing (the contract) before we actually start writing code and so without further ado.
 
 ```kotlin
-class ReaderTest {
-    @Test
-    fun `Feed test`() {
-        assertEquals(app(Request(GET, "/feed")), Response(OK).body("feed"))
-    }
 
-    @Test
-    fun `User test`() {
-        assertEquals(app(Request(GET, "/user")), Response(OK).body("user"))
+class ReaderTest : ShouldSpec() {
+    override fun listeners(): List<TestListener> = listOf(ServiceTestListener)
+
+    private val newReaderRequest = NewReaderRequest(
+        firstName = "Joe",
+        lastName = "Bloggs",
+        email = "joe.bloggs@mildlyskilled.com",
+        password = "test"
+    )
+
+    private var reader: MildlySkilledReader? = null
+
+    init {
+        "Reader Application" {
+            should("register a new reader") {
+                val requestLens = Body.auto<NewReaderRequest>().toLens()
+                val readerLens = Body.auto<MildlySkilledReader>().toLens()
+                val newReaderResponse = app(Request(POST, "/reader/new").body(requestLens(newReaderRequest, Response(ACCEPTED)).bodyString()))
+                reader = readerLens(newReaderResponse)
+                reader?.firstName shouldBe "Joe"
+                reader?.lastName shouldBe "Bloggs"
+                reader?.email shouldBe "joe.bloggs@mildlyskilled.com"
+            }
+
+            should("get OK from user endpoint") {
+                app(Request(GET, "/reader/${reader?.id}")) shouldHaveStatus OK
+                val message = Body.auto<MildlySkilledReader>().toLens()
+                val reader = message(app(Request(GET, "/reader/${reader?.id}")))
+                reader.firstName shouldBe "Joe"
+                reader.lastName shouldBe "Bloggs"
+                reader.email shouldBe "joe.bloggs@mildlyskilled.com"
+            }
+
+            should("return NOT_FOUND where we don't have a user") {
+                val messageLens = Body.auto<Message>().toLens()
+                app(Request(GET, "/reader/${UUID.randomUUID()}")) shouldHaveStatus NOT_FOUND
+                app(Request(GET, "/reader/${UUID.randomUUID()}")) shouldHaveBody messageLens(Message("user not found"), Response(
+                    NOT_FOUND)).bodyString()
+            }
+
+            should("get OK from the feed endpoint") {
+                app(Request(GET, "/feed/${reader?.id}")) shouldHaveStatus OK
+            }
+
+            should("get not found if a non existent id is passed") {
+                app(Request(GET, "/feed/${UUID.randomUUID()}")) shouldHaveStatus NOT_FOUND
+            }
+
+            should("accept uploaded feeds") {
+                val sample = ReaderTest::class.java.getResource("/xml/my_rss_feeds.opml")?.readText()
+                val base64 = Base64.getEncoder().encodeToString(sample?.toByteArray())
+                val importRequest = ImportRequest(
+                    readerId = reader!!.id.toString(),
+                    payload = base64
+                )
+
+                val requestLens = Body.auto<ImportRequest>().toLens()
+                app(Request(POST, "/feed/import").body(requestLens(importRequest, Response(ACCEPTED)).bodyString())) shouldHaveStatus ACCEPTED
+            }
+        }
     }
 }
 ```
@@ -172,7 +224,7 @@ data class Outline(
 )
 ```
 
-A lot of magic happening here but this is the function to parse it.
+A lot of magic happening here but this is the function to parse it. By using a [Lens](https://ncatlab.org/nlab/show/lens+%28in+computer+science%29) extractor we are able to get the data class out of a String. So it's perhaps a more palatable way of doing reflection.
 
 ```kotlin
 package com.mildlyskilled.parser
@@ -281,15 +333,52 @@ class Feed(id: EntityID<UUID>): UUIDEntity(id) {
     var xmlUrl by FeedTable.xmlUrl
     var htmlUrl by FeedTable.htmlUrl
     var icon by FeedTable.icon
+
+    fun toOutGoingNewsFeed() = with(this) {
+        OutgoingFeed(
+            name = this.name,
+            title = this.title,
+            type = this.type,
+            xmlUrl = this.xmlUrl,
+            htmlUrl = this.htmlUrl,
+            icon = this.icon?.value
+        )
+    }
+}
+
+class Section(id: EntityID<UUID>): UUIDEntity(id) {
+    companion object : EntityClass<UUID, Section>(SectionTable)
+    var name by SectionTable.name
+    var title by SectionTable.title
+    var owner by SectionTable.reader
+    var created by SectionTable.created
+    var updated by SectionTable.updated
+    var feeds by Feed via SectionFeedTable
+
+    fun toOutgoingSection() =
+        with(this){
+            OutgoingSection(
+                name = this.name,
+                title = this.title,
+                owner = this.owner.value,
+                created = this.created.toString(),
+                updated = this.updated?.toString(),
+                feeds = this.feeds.map {
+                    it.toOutGoingNewsFeed()
+                }
+            )
+        }
 }
 ```
+
+You may have noticed that there is now this function in the entity what converts the actual entity to a new data class. This is imperative if you want to return this as serialised data, because if you do you will run into a STACK OVERFLOW error because of the many to many relationship defined on the feeds field in the Section entity. Also I am converting the datetime fields to string because our serialisers here do not know how to handle joda-time datetime fields and exposed uses those to model sql datetime so to get around this catch 22, I opted for the low-tech approach.
 
 And then we can go ahead and implement some repositories and services like so:
 
 ```kotlin
 // repository interface
 interface FeedRepository {
-    suspend fun getUserSections(readerId: UUID): UserFeed?
+    suspend fun getReaderSections(readerId: UUID): UserFeed?
     suspend fun persistFeed(readerId: UUID, opml: Opml): List<Unit?>
 }
 
@@ -302,14 +391,14 @@ import java.util.UUID
 
 class FeedService(private val feedRepository: FeedRepository) {
     suspend fun readerFeed(readerId: String) =
-        feedRepository.getUserSections(UUID.fromString(readerId))
+        feedRepository.getReaderSections(UUID.fromString(readerId))
 
     suspend fun saveFeed(readerId: String, opml: Opml): Boolean =
         feedRepository.persistFeed(UUID.fromString(userId), opml).isNotEmpty()
 }
 ```
 
-Finally we can update our routes to look like what follows: 
+Finally we can update our routes to look like what follows:
 
 ```kotlin
 package com.mildlyskilled.route
@@ -350,6 +439,17 @@ fun feed(feedService: FeedService): Array<RoutingHttpHandler> =
     )
 ```
 
-A point of not here, we have not built in any of the authentication/authorisation yet... That will come in subsequent posts but so for the mean time this should suffice for a good jump off point.
+A point of note here, we have not built in any of the authentication/authorisation yet... That will come in subsequent posts but for the mean time this should suffice for a good jump off point.
+
+So what do we have now:
+
+- Exposing endpoints &#x2713;
+- Receive uploads and persist &#x2713;
+- Parse xml &#x2713;
+- And store the XML and nicely normalised data in a nice database &#x2713;
+
+Also a last bit on the testing... I swapped out the default testing libraries in the http4k installation for kotlintest because I wanted to use the should spec and I also prefer how it uses listeners for setUp and tearDown... I like to wipe the database before each test suite for a variety of reasons including avoiding race conditions.
+
+So in a nutshell, this has been a pretty painless process so far and I am happy I have taken this on, because it gives new a new option to quickly build out lightweight backend services. Once again if you would like to look at the code that I produced for this it is all here at [https://github.com/mildlyskilled/reader](https://github.com/mildlyskilled/reader). I can see this being used as some end to end test harness, or even for a function as a service offering. In my next post I will write about how I am going about securing this reader service, how to retrieve news items, and perhaps jump into the scaffolding the mobile application.
 
 [^1]: https://www.http4k.org/documentation/
