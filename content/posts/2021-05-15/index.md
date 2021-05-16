@@ -2,7 +2,7 @@
 title: "A Feed Reader: Authentication"
 date: 2021-05-15T10:00:10+01:00
 tags: ["programming", "rest", "engineering", "api"]
-draft: true
+draft: false
 author: "Kwabena Aning"
 type: "post"
 ---
