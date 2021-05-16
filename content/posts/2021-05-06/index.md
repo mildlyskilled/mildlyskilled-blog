@@ -278,7 +278,6 @@ So what do we have now:
 - Parse xml &#x2713;
 - And store the XML and nicely normalised data in a nice database
 
-
 Some persistence
 ---
 
