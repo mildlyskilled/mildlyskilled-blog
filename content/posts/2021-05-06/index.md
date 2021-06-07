@@ -182,7 +182,7 @@ fun main() {
 
 ```
 
-When you get around to running this you should be able to hit http://localhost/9000/(feed/user) and get something back and in addition to that you should see what your request looked like and what the response looked like because of the filters `PrintRequest()` and `PrintResponse()` respectively.
+When you get around to running this you should be able to hit `http://localhost/9000/(feed/user)` and get something back and in addition to that you should see what your request looked like and what the response looked like because of the filters `PrintRequest()` and `PrintResponse()` respectively.
 
 Some Parsing
 ---

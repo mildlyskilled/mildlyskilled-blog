@@ -144,7 +144,7 @@ I leave this as simple as possible. The AuthService just takes the creadentials 
 Through a Filter
 ---
 
-Now that we have a way to issue tokens, we should now build the functiality to validate those tokens. The filter is simple here extract the Authorization header which looks like 
+Now that we have a way to issue tokens, we should now build the functiality to validate those tokens. The filter is simple here extract the Authorization header which looks like.
 
 ```plain
 Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkODE2ZTQxYS1jMDIwLTQ4YmUtYWVlMC05MGU4NzhlNGVjNzEiLCJpc3MiOiJtaWxkbHlza2lsbGVkLmNvbSIsImV4cCI6MTYyMTI2MDQ5Nn0.pPU1ve6uIaqFEq9Pxmss60fdGM6HrQhZ1F82Do9TBm4"
