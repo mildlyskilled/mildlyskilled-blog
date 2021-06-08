@@ -52,7 +52,7 @@ I'm going to be using [webview_flutter](https://pub.dev/packages/webview_flutter
 Some Screenshots
 ---
 
-We start off with the front matter. Currently the homw screen will just be partitioned by whatever categories I had in my OPML file and will also display the news channels. This is going to change over time as I want to make it so that it's not just something I use, I would like to make the application a bit more flexible moving forward, so things like creating new sections, displaying news by section and such.
+We start off with the front matter. Currently the home screen will just be partitioned by whatever categories I had in my OPML file and will also display the news channels. This is going to change over time as I want to make it so that it's not just something I use, I would like to make the application a bit more flexible moving forward, so things like creating new sections, displaying news by section and such.
 
 ![Front matter](/posts/2021-06-07/images/front_matter.png)
 
