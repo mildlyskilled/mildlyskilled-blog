@@ -16,7 +16,9 @@ I'm mostly interested in:
 * Concurrent Systems and Models
 * Asynchronous Processing
 
-I also work as a Senior Software Engineer at American Express
+I also work as a Senior Data Engineer at Mettle by NatWest.
+
+Oh and I'm on [Mastodon]({{< relref 'https://mastodon.world/@kwabena' >}} 'me') too
 
 > We are like dwarfs sitting on the shoulders of giants.
 > We see more, and things that are more distant, than they did, not because our

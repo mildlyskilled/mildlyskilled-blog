@@ -92,7 +92,7 @@ socialShareEmail     = false
 [params.intro]
   header    = ""
   paragraph = "Software engineering for the mildly skilled"
-  about     = "Software development for the mildly skilled. A blog maintained by me Kwabena Aning, suffice it to say these are my opinions and I share them freely with the understanding that you acknowledge that they are my own."
+  about     = "Software development for the mildly skilled. A blog maintained by me Kwabena Aning, suffice it to say these are my opinions and I share them freely with the understanding that you acknowledge that they are my own"
 
   # This appears at the top of the sidebar above params.intro.header.
   # A width of less than 100px is recommended from a design perspective.
